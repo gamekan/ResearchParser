@@ -1,0 +1,32 @@
+ 
+filterNum = 3
+filename = 't.txt'
+fp = open(filename)
+data = fp.read()
+words = data.split()
+fp.close()
+wCount = 0
+unwanted_chars = "&,./?"
+unwantedLetter = []
+# ['the','with','they','and','for','out']
+wordfreq = {}
+for raw_word in words:
+  word = raw_word.strip(unwanted_chars)
+  if word in unwantedLetter:
+    continue
+  if word not in wordfreq:
+    wordfreq[word] = 0 
+  wordfreq[word] += 1
+ranking = [(wordfreq[key], key) for key in wordfreq]
+ 
+ranking.sort()
+ranking.reverse()
+for word in ranking:
+  if len(word[1]) >= filterNum: # (#,'word', ...)
+    print word
+# print ranking 
+ 
+'''References
+https://gist.github.com/acrymble/1065661
+http://textsummarization.net/text-summarizer
+''' 
